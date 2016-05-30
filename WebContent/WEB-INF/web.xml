@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <servlet>
+    <servlet-name>SynDataServlet</servlet-name>
+    <servlet-class>com.simoncherry.averageface.SynDataServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>UploadFileServlet</servlet-name>
+    <servlet-class>com.simoncherry.averageface.UploadFileServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SynTxtDataServlet</servlet-name>
+    <servlet-class>com.simoncherry.averageface.SynTxtDataServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>MergeFaceServlet</servlet-name>
+    <servlet-class>com.simoncherry.averageface.MergeFaceServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>DirectoryServlet</servlet-name>
+    <servlet-class>com.simoncherry.averageface.DirectoryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SynDataServlet</servlet-name>
+    <url-pattern>/SynDataServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UploadFileServlet</servlet-name>
+    <url-pattern>/UploadFileServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SynTxtDataServlet</servlet-name>
+    <url-pattern>/SynTxtDataServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MergeFaceServlet</servlet-name>
+    <url-pattern>/MergeFaceServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DirectoryServlet</servlet-name>
+    <url-pattern>/DirectoryServlet</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
