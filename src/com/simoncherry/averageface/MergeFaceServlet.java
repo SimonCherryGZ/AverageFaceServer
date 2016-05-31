@@ -29,10 +29,10 @@ public class MergeFaceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String appKey ="6d2bbce30520014b443e5f74";  
     private static final String masterSecret = "1a0d41542b569500a1845efd";
-    PrintStream out = System.out; //保存原输出流
+    //PrintStream out = System.out; //保存原输出流
     static int subDirFileNum = 0;
 	int logIndex = 0;
-	boolean isProcessing = false;
+	volatile boolean isProcessing = false;
 	String resultFilePath = "";
        
     /**
@@ -57,10 +57,12 @@ public class MergeFaceServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		System.out.println("---------merge start-------------");
+		PrintStream out = System.out; //保存原输出流
+		System.setOut(out); //恢复原有输出流
+		//System.out.println("---------merge start-------------");
 		String path = new String(request.getParameter("path").getBytes(
 				"iso-8859-1"), "UTF-8");
-		System.out.println("---------" + path +"-------------");
+		//System.out.println("---------" + path +"-------------");
 		
 		if(!isProcessing){
 			isProcessing = true;
@@ -106,6 +108,11 @@ public class MergeFaceServlet extends HttpServlet {
 				
 				System.setOut(out); //恢复原有输出流
 				System.out.println("程序运行完毕");
+				System.out.println("输出结果： " + resultFilePath);
+				
+				while(isProcessing);
+				JPushUtil.SendJPushMsg(appKey, masterSecret, "合成已完成");
+				JPushUtil.SendJPushMsg(appKey, masterSecret, resultFilePath);
 				
 			} catch (MWException e) {
 				e.printStackTrace();
@@ -198,8 +205,8 @@ public class MergeFaceServlet extends HttpServlet {
 					logIndex++;
 				}
 			}
-			JPushUtil.SendJPushMsg(appKey, masterSecret, "合成已完成");
-			JPushUtil.SendJPushMsg(appKey, masterSecret, resultFilePath);
+			//JPushUtil.SendJPushMsg(appKey, masterSecret, "合成已完成");
+			//JPushUtil.SendJPushMsg(appKey, masterSecret, resultFilePath);
 			isProcessing = false;
 		}
 	}
